@@ -66,20 +66,20 @@ const MitigationPanel = ({ analysis, fileData }) => {
       {mitigation && (
         <div className="space-y-4 animate-fadeIn">
           {/* Header */}
-          <div className="bg-gradient-to-r from-emerald-50 to-blue-50 border border-emerald-200 rounded-xl p-5">
+          <div className="bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/30 dark:to-blue-900/30 border border-emerald-200 dark:border-emerald-800 rounded-xl p-5">
             <div className="flex items-center space-x-2 mb-2">
               <span className="text-lg">✨</span>
-              <h3 className="text-sm font-bold text-emerald-800 uppercase tracking-wide">
+              <h3 className="text-sm font-bold text-emerald-800 dark:text-emerald-400 uppercase tracking-wide">
                 Mitigation Strategy
               </h3>
             </div>
-            <p className="text-sm text-slate-600">{mitigation.description}</p>
+            <p className="text-sm text-slate-600 dark:text-slate-300">{mitigation.description}</p>
           </div>
 
           {/* Expected Improvement */}
           {mitigation.new_estimated_bias_score !== undefined && (
-            <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-              <h4 className="text-sm font-bold text-slate-700 mb-3">
+            <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-sm">
+              <h4 className="text-sm font-bold text-slate-700 dark:text-slate-200 mb-3">
                 Expected Improvement
               </h4>
               <div className="flex items-center space-x-4">
@@ -122,20 +122,20 @@ const MitigationPanel = ({ analysis, fileData }) => {
           {/* Synthetic Data (for data files) */}
           {mitigation.mitigation_type === 'synthetic_data' &&
             mitigation.synthetic_data && (
-              <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-                <h4 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">
+              <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-sm">
+                <h4 className="text-sm font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wide mb-3">
                   Synthetic Data ({mitigation.synthetic_data.length} rows)
                 </h4>
-                <div className="max-h-80 overflow-auto rounded-lg border border-slate-100">
+                <div className="max-h-80 overflow-auto rounded-lg border border-slate-100 dark:border-slate-700">
                   <table className="w-full text-xs">
-                    <thead className="bg-slate-50 sticky top-0">
+                    <thead className="bg-slate-50 dark:bg-slate-900 sticky top-0">
                       <tr>
                         {mitigation.synthetic_data.length > 0 &&
                           Object.keys(mitigation.synthetic_data[0]).map(
                             (key) => (
                               <th
                                 key={key}
-                                className="text-left p-2 text-slate-500 font-semibold border-b border-slate-200"
+                                className="text-left p-2 text-slate-500 dark:text-slate-400 font-semibold border-b border-slate-200 dark:border-slate-700"
                               >
                                 {key}
                               </th>
@@ -147,12 +147,12 @@ const MitigationPanel = ({ analysis, fileData }) => {
                       {mitigation.synthetic_data.map((row, i) => (
                         <tr
                           key={i}
-                          className="border-b border-slate-50 hover:bg-blue-50/50"
+                          className="border-b border-slate-50 dark:border-slate-700/50 hover:bg-blue-50/50 dark:hover:bg-blue-900/20"
                         >
                           {Object.values(row).map((val, j) => (
                             <td
                               key={j}
-                              className="p-2 text-slate-700"
+                              className="p-2 text-slate-700 dark:text-slate-300"
                             >
                               {String(val)}
                             </td>
@@ -168,24 +168,24 @@ const MitigationPanel = ({ analysis, fileData }) => {
           {/* Image Prompts (for image files) */}
           {mitigation.mitigation_type === 'image_prompts' &&
             mitigation.image_prompts && (
-              <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-                <h4 className="text-sm font-bold text-slate-700 uppercase tracking-wide mb-3">
+              <div className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl p-5 shadow-sm">
+                <h4 className="text-sm font-bold text-slate-700 dark:text-slate-200 uppercase tracking-wide mb-3">
                   Balancing Image Prompts
                 </h4>
                 <div className="space-y-3 max-h-96 overflow-y-auto">
                   {mitigation.image_prompts.map((item, i) => (
                     <div
                       key={i}
-                      className="p-3 bg-slate-50 rounded-lg border border-slate-100"
+                      className="p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg border border-slate-100 dark:border-slate-700"
                     >
-                      <p className="text-sm font-medium text-slate-800 mb-1">
+                      <p className="text-sm font-medium text-slate-800 dark:text-slate-200 mb-1">
                         {i + 1}. {item.prompt}
                       </p>
                       <div className="flex flex-wrap gap-2 mt-2">
-                        <span className="text-xs px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full">
+                        <span className="text-xs px-2 py-0.5 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-400 rounded-full">
                           Addresses: {item.addresses_bias}
                         </span>
-                        <span className="text-xs px-2 py-0.5 bg-blue-100 text-blue-700 rounded-full">
+                        <span className="text-xs px-2 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 rounded-full">
                           Target: {item.target_demographic}
                         </span>
                       </div>
@@ -197,8 +197,8 @@ const MitigationPanel = ({ analysis, fileData }) => {
 
           {/* Expected Improvement Description */}
           {mitigation.expected_improvement && (
-            <div className="bg-blue-50 border border-blue-200 rounded-xl p-4">
-              <p className="text-sm text-blue-700">
+            <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl p-4">
+              <p className="text-sm text-blue-700 dark:text-blue-400">
                 <span className="font-semibold">Impact: </span>
                 {mitigation.expected_improvement}
               </p>

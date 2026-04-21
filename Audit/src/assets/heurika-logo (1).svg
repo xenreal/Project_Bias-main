@@ -1,0 +1,51 @@
+<svg
+  width="400"
+  height="120"
+  viewBox="0 0 300 100"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+>
+  <defs>
+    <linearGradient id="purplePinkGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#8B5CF6" />
+      <stop offset="100%" stop-color="#EC4899" />
+    </linearGradient>
+  </defs>
+
+  <g transform="translate(10, 20)">
+    <path
+      d="M25 10C25 4.477 20.523 0 15 0C9.477 0 5 4.477 5 10C5 13.5 6.5 16.5 9 18.5V22C9 23.105 9.895 24 11 24H19C20.105 24 21 23.105 21 22V18.5C23.5 16.5 25 13.5 25 10Z"
+      fill="#FFB800"
+    />
+    <rect x="10" y="24" width="10" height="3" rx="1" fill="#FFB800" />
+    <rect x="11" y="27" width="8" height="2" rx="1" fill="#FFB800" />
+    <circle cx="12" cy="8" r="2" fill="#FFF" opacity="0.6" />
+    <path d="M15 -5V-8M15 38V35M-2 15H-5M32 15H35M3 3L1 1M27 27L29 29M3 27L1 29M27 3L29 1"
+      stroke="#FFB800"
+      stroke-width="2"
+      stroke-linecap="round"
+    />
+  </g>
+
+  <text
+    x="60"
+    y="55"
+    font-family="system-ui, -apple-system, sans-serif"
+    font-size="36"
+    font-weight="700"
+    fill="url(#purplePinkGradient)"
+    letter-spacing="2"
+  >
+    HEURIKA
+  </text>
+
+  <line
+    x1="60"
+    y1="65"
+    x2="160"
+    y2="65"
+    stroke="url(#purplePinkGradient)"
+    stroke-width="3"
+    stroke-linecap="round"
+  />
+</svg>

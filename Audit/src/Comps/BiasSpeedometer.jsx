@@ -60,7 +60,8 @@ const BiasSpeedometer = ({ score = 0, biasType = 'Unknown' }) => {
   ];
 
   // Gradient stops for the arc
-  const COLORS = [color, '#f1f5f9'];
+  const isDark = typeof document !== 'undefined' && document.documentElement.classList.contains('dark');
+  const COLORS = [color, isDark ? '#334155' : '#f1f5f9'];
 
   return (
     <div className="flex flex-col items-center">
@@ -94,7 +95,7 @@ const BiasSpeedometer = ({ score = 0, biasType = 'Unknown' }) => {
           >
             {animatedScore}
           </span>
-          <span className="text-lg font-bold text-slate-400">%</span>
+          <span className="text-lg font-bold text-slate-400 dark:text-slate-500">%</span>
         </div>
       </div>
 
@@ -106,8 +107,8 @@ const BiasSpeedometer = ({ score = 0, biasType = 'Unknown' }) => {
         >
           {label}
         </p>
-        <p className="text-xs text-slate-500">
-          Primary: <span className="font-medium text-slate-700">{biasType}</span>
+        <p className="text-xs text-slate-500 dark:text-slate-400">
+          Primary: <span className="font-medium text-slate-700 dark:text-slate-200">{biasType}</span>
         </p>
       </div>
     </div>

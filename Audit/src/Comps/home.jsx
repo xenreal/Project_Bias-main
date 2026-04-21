@@ -4,6 +4,8 @@ import ScanningLoader from './ScanningLoader';
 import ResultDashboard from './ResultDashboard';
 import { analyzeBias } from '../services/geminiService';
 import { generateReport } from '../utils/reportGenerator';
+import Logo1 from '../assets/heurika-logo (3).svg';
+import Logo2 from '../assets/heurika-logo (2).svg';
 
 // -------------------------------------------------------------------
 // PageContent: shared layout for normal + magnified layers (landing)
@@ -17,26 +19,28 @@ const PageContent = ({
   onAnalyze,
   fileData,
   analysisDisabled,
+  isDarkMode,
+  toggleTheme,
 }) => (
   <div
-    className={`w-full h-full bg-white flex flex-col font-sans ${
+    className={`w-full h-full bg-slate-50 dark:bg-slate-900 flex flex-col font-sans ${
       isMagnified ? 'pointer-events-none' : ''
     }`}
   >
-    <nav className="flex w-full items-center justify-between px-8 py-5 border-b border-slate-100 bg-white/80 backdrop-blur-md">
+    <nav className="flex w-full items-center justify-between px-8 py-5 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md">
       <div className="flex items-center space-x-6">
-        <button className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+        <button className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
           Product
         </button>
-        <button className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+        <button className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
           Contact Us
         </button>
-        <button className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors">
+        <button className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
           About Us
         </button>
       </div>
-      <div className="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent cursor-pointer">
-        LOGO
+      <div onClick={toggleTheme} className="cursor-pointer transition-transform hover:scale-105 active:scale-95">
+        <img src={isDarkMode ? Logo2 : Logo1} alt="Heurika Logo" className="h-14 w-auto object-contain" />
       </div>
     </nav>
 
@@ -48,17 +52,17 @@ const PageContent = ({
         onMouseLeave={() => onTextHover?.(false)}
       >
         <div className="mb-6 w-full text-center cursor-default">
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-slate-900 leading-tight mb-2">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tighter text-slate-900 dark:text-white leading-tight mb-2">
             Don't guess if <br className="hidden md:block" />
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               your AI is fair.
             </span>
           </h1>
-          <p className="w-full text-lg md:text-xl text-slate-500 cursor-default mb-6 whitespace-nowrap hidden md:block">
+          <p className="w-full text-lg md:text-xl text-slate-500 dark:text-slate-400 cursor-default mb-6 whitespace-nowrap hidden md:block">
             Prove it with automated bias auditing and one-click regulatory
             compliance.
           </p>
-          <p className="w-full text-lg text-slate-500 cursor-default mb-6 block md:hidden">
+          <p className="w-full text-lg text-slate-500 dark:text-slate-400 cursor-default mb-6 block md:hidden">
             Prove it with automated bias auditing and one-click regulatory
             compliance.
           </p>
@@ -67,13 +71,13 @@ const PageContent = ({
 
       {/* Context input */}
       <div className="w-full max-w-xl mx-auto z-10 mb-6">
-        <input
-          type="text"
-          value={userContext}
-          onChange={(e) => onContextChange?.(e.target.value)}
-          placeholder="Give detailed description on what type of AI do you want to train."
-          className="w-full px-6 py-4 rounded-2xl border-2 border-slate-200 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-lg text-slate-700 shadow-sm placeholder:text-slate-400 bg-white/50 backdrop-blur-sm"
-        />
+          <input
+            type="text"
+            value={userContext}
+            onChange={(e) => onContextChange?.(e.target.value)}
+            placeholder="Give detailed description on what type of AI do you want to train."
+            className="w-full px-6 py-4 rounded-2xl border-2 border-slate-200 dark:border-slate-700 outline-none focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 transition-all text-lg text-slate-700 dark:text-slate-200 shadow-sm placeholder:text-slate-400 dark:placeholder:text-slate-500 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm"
+          />
       </div>
 
       {/* File uploader */}
@@ -115,6 +119,18 @@ const Home = () => {
   const [analysisResult, setAnalysisResult] = useState(null);
   const [appState, setAppState] = useState('idle'); // idle | scanning | results
   const [error, setError] = useState(null);
+  
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  useEffect(() => {
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDarkMode]);
+
+  const toggleTheme = () => setIsDarkMode(!isDarkMode);
 
   // Magnifier: track mouse
   useEffect(() => {
@@ -196,12 +212,12 @@ const Home = () => {
   // ---- RESULTS STATE ----
   if (appState === 'results' && analysisResult) {
     return (
-      <div className="min-h-screen bg-slate-50">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-900 transition-colors">
         {/* Simple nav for results page */}
-        <nav className="flex w-full items-center justify-between px-8 py-5 border-b border-slate-100 bg-white/80 backdrop-blur-md">
+        <nav className="flex w-full items-center justify-between px-8 py-5 border-b border-slate-100 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur-md">
           <button
             onClick={handleReset}
-            className="text-sm font-medium text-slate-500 hover:text-slate-900 transition-colors flex items-center space-x-1"
+            className="text-sm font-medium text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors flex items-center space-x-1"
           >
             <svg
               className="w-4 h-4"
@@ -218,8 +234,8 @@ const Home = () => {
             </svg>
             <span>Back</span>
           </button>
-          <div className="text-2xl font-bold tracking-tight bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            LOGO
+          <div onClick={toggleTheme} className="cursor-pointer transition-transform hover:scale-105 active:scale-95">
+            <img src={isDarkMode ? Logo2 : Logo1} alt="Heurika Logo" className="h-14 w-auto object-contain" />
           </div>
         </nav>
 
@@ -235,7 +251,7 @@ const Home = () => {
 
   // ---- LANDING / IDLE STATE ----
   return (
-    <div className="relative min-h-screen w-full bg-white text-slate-900 overflow-hidden cursor-default">
+    <div className="relative min-h-screen w-full bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-white overflow-hidden cursor-default transition-colors">
       {/* Base Normal Layer */}
       <div className="relative w-full z-10">
         <PageContent
@@ -247,6 +263,8 @@ const Home = () => {
           onAnalyze={handleAnalyze}
           fileData={fileData}
           analysisDisabled={appState === 'scanning'}
+          isDarkMode={isDarkMode}
+          toggleTheme={toggleTheme}
         />
       </div>
 
@@ -297,6 +315,8 @@ const Home = () => {
           isMagnified={true}
           userContext={userContext}
           fileData={fileData}
+          isDarkMode={isDarkMode}
+          toggleTheme={toggleTheme}
         />
       </div>
     </div>

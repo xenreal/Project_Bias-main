@@ -33,15 +33,15 @@ const ResultDashboard = ({
       <div className="w-full max-w-3xl mx-auto py-8 px-4 space-y-8 animate-dashIn">
         {/* Header */}
         <div className="text-center space-y-2">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">
+          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
             Audit{' '}
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               Results
             </span>
           </h2>
-          <p className="text-sm text-slate-500">
+          <p className="text-sm text-slate-500 dark:text-slate-400">
             Analysis of{' '}
-            <span className="font-medium text-slate-700">
+            <span className="font-medium text-slate-700 dark:text-slate-300">
               {fileData?.fileName}
             </span>
           </p>
@@ -49,7 +49,7 @@ const ResultDashboard = ({
 
         {/* Speedometer */}
         <div
-          className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm"
+          className="bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl p-8 shadow-sm"
           id="bias-gauge-section"
         >
           <BiasSpeedometer
@@ -72,7 +72,7 @@ const ResultDashboard = ({
         <div className="flex flex-col sm:flex-row gap-3 pt-4">
           <button
             onClick={onDownloadReport}
-            className="flex-1 py-3 px-6 bg-slate-900 text-white font-semibold rounded-xl hover:bg-slate-800 transition-colors flex items-center justify-center space-x-2 shadow-sm"
+            className="flex-1 py-3 px-6 bg-slate-900 dark:bg-slate-50 text-white dark:text-slate-900 font-semibold rounded-xl hover:bg-slate-800 dark:hover:bg-slate-200 transition-colors flex items-center justify-center space-x-2 shadow-sm"
           >
             <svg
               className="w-5 h-5"
@@ -91,7 +91,7 @@ const ResultDashboard = ({
           </button>
           <button
             onClick={onReset}
-            className="flex-1 py-3 px-6 bg-slate-100 text-slate-700 font-semibold rounded-xl hover:bg-slate-200 transition-colors"
+            className="flex-1 py-3 px-6 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 font-semibold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
           >
             Analyze Another File
           </button>

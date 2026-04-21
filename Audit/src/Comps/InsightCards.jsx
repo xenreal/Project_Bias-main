@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
 const severityColor = {
-  low: 'bg-emerald-100 text-emerald-700 border-emerald-200',
-  medium: 'bg-amber-100 text-amber-700 border-amber-200',
-  high: 'bg-orange-100 text-orange-700 border-orange-200',
-  critical: 'bg-red-100 text-red-700 border-red-200',
+  low: 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 border-emerald-200 dark:border-emerald-800',
+  medium: 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-400 border-amber-200 dark:border-amber-800',
+  high: 'bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-400 border-orange-200 dark:border-orange-800',
+  critical: 'bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-400 border-red-200 dark:border-red-800',
 };
 
 const severityIcon = {
@@ -18,9 +18,9 @@ const CollapsibleSection = ({
   title, 
   icon, 
   defaultOpen = false, 
-  containerClass = "bg-white border border-slate-200 rounded-xl shadow-sm", 
-  headerClass = "text-slate-700",
-  bodyClass = "p-5 border-t border-black/5",
+  containerClass = "bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl shadow-sm", 
+  headerClass = "text-slate-700 dark:text-slate-200",
+  bodyClass = "p-5 border-t border-black/5 dark:border-white/5",
   children 
 }) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
@@ -69,16 +69,16 @@ const DataInsightCard = ({ metrics, findings }) => {
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-left border-b border-slate-100">
-                    <th className="pb-2 text-slate-500 font-medium">Group</th>
-                    <th className="pb-2 text-slate-500 font-medium text-right">Rate</th>
+                  <tr className="text-left border-b border-slate-100 dark:border-slate-700">
+                    <th className="pb-2 text-slate-500 dark:text-slate-400 font-medium">Group</th>
+                    <th className="pb-2 text-slate-500 dark:text-slate-400 font-medium text-right">Rate</th>
                   </tr>
                 </thead>
                 <tbody>
                   {Object.entries(metrics.selection_rates).map(([group, rate]) => (
-                    <tr key={group} className="border-b border-slate-50 last:border-0">
-                      <td className="py-2 text-slate-700">{group}</td>
-                      <td className="py-2 text-right font-mono font-semibold text-slate-800">
+                    <tr key={group} className="border-b border-slate-50 dark:border-slate-700/50 last:border-0">
+                      <td className="py-2 text-slate-700 dark:text-slate-300">{group}</td>
+                      <td className="py-2 text-right font-mono font-semibold text-slate-800 dark:text-slate-200">
                         {typeof rate === 'number' ? `${(rate * 100).toFixed(1)}%` : rate}
                       </td>
                     </tr>
@@ -94,13 +94,13 @@ const DataInsightCard = ({ metrics, findings }) => {
         <CollapsibleSection
           title="Proxy Variables Detected"
           icon={<span className="">⚠</span>}
-          containerClass="bg-amber-50 border border-amber-200 rounded-xl"
-          headerClass="text-amber-800"
-          bodyClass="p-5 border-t border-amber-200"
+          containerClass="bg-amber-50 dark:bg-amber-900/20 border border-amber-200 dark:border-amber-800 rounded-xl"
+          headerClass="text-amber-800 dark:text-amber-400"
+          bodyClass="p-5 border-t border-amber-200 dark:border-amber-800"
         >
           <div className="flex flex-wrap gap-2">
             {metrics.proxy_variables.map((v) => (
-              <span key={v} className="px-3 py-1 bg-amber-100 text-amber-700 rounded-full text-sm font-medium">
+              <span key={v} className="px-3 py-1 bg-amber-100 dark:bg-amber-900/40 text-amber-700 dark:text-amber-400 rounded-full text-sm font-medium">
                 {v}
               </span>
             ))}
@@ -116,7 +116,7 @@ const DataInsightCard = ({ metrics, findings }) => {
         >
           <div className="flex flex-wrap gap-2">
             {metrics.skewed_columns.map((col) => (
-              <span key={col} className="px-3 py-1 bg-slate-100 text-slate-700 rounded-full text-sm font-medium border border-slate-200">
+              <span key={col} className="px-3 py-1 bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-full text-sm font-medium border border-slate-200 dark:border-slate-600">
                 {col}
               </span>
             ))}
@@ -139,9 +139,9 @@ const ImageInsightCard = ({ metrics, findings }) => {
         >
             <div className="space-y-2">
               {Object.entries(metrics.demographic_breakdown).map(([category, value]) => (
-                <div key={category} className="flex items-center justify-between py-1.5 border-b border-slate-50 last:border-0">
-                  <span className="text-sm text-slate-600 capitalize">{category}</span>
-                  <span className="text-sm font-semibold text-slate-800">{value}</span>
+                <div key={category} className="flex items-center justify-between py-1.5 border-b border-slate-50 dark:border-slate-700/50 last:border-0">
+                  <span className="text-sm text-slate-600 dark:text-slate-400 capitalize">{category}</span>
+                  <span className="text-sm font-semibold text-slate-800 dark:text-slate-200">{value}</span>
                 </div>
               ))}
             </div>
@@ -154,13 +154,13 @@ const ImageInsightCard = ({ metrics, findings }) => {
           title="Diversity Score"
         >
           <div className="flex items-center space-x-3">
-            <div className="flex-1 bg-slate-200 rounded-full h-3 overflow-hidden">
+            <div className="flex-1 bg-slate-200 dark:bg-slate-700 rounded-full h-3 overflow-hidden">
               <div
                 className="h-full rounded-full bg-gradient-to-r from-purple-500 to-blue-500 transition-all duration-1000"
                 style={{ width: `${metrics.diversity_score}%` }}
               ></div>
             </div>
-            <span className="text-lg font-bold text-slate-800">{metrics.diversity_score}%</span>
+            <span className="text-lg font-bold text-slate-800 dark:text-slate-200">{metrics.diversity_score}%</span>
           </div>
         </CollapsibleSection>
       )}
@@ -170,13 +170,13 @@ const ImageInsightCard = ({ metrics, findings }) => {
         <CollapsibleSection
           title="Representation Gaps"
           icon={<span className="">🔴</span>}
-          containerClass="bg-red-50 border border-red-200 rounded-xl"
-          headerClass="text-red-800"
-          bodyClass="p-5 border-t border-red-200"
+          containerClass="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-xl"
+          headerClass="text-red-800 dark:text-red-400"
+          bodyClass="p-5 border-t border-red-200 dark:border-red-800"
         >
             <ul className="space-y-1.5">
               {metrics.representation_gaps.map((gap, i) => (
-                <li key={i} className="text-sm text-red-700 flex items-start">
+                <li key={i} className="text-sm text-red-700 dark:text-red-400 flex items-start">
                   <span className="mr-2 mt-0.5">•</span>
                   {gap}
                 </li>
@@ -201,11 +201,11 @@ const InsightCards = ({ analysis }) => {
         <CollapsibleSection
           title="Analysis Summary"
           defaultOpen={true}
-          containerClass="bg-gradient-to-r from-slate-50 to-blue-50 border border-slate-200 rounded-xl"
-          headerClass="text-slate-700"
-          bodyClass="p-5 border-t border-slate-200"
+          containerClass="bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-800 dark:to-blue-900/20 border border-slate-200 dark:border-slate-700 rounded-xl"
+          headerClass="text-slate-700 dark:text-slate-200"
+          bodyClass="p-5 border-t border-slate-200 dark:border-slate-700"
         >
-          <p className="text-sm text-slate-600 leading-relaxed">{summary}</p>
+          <p className="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">{summary}</p>
         </CollapsibleSection>
       )}
 
@@ -226,7 +226,7 @@ const InsightCards = ({ analysis }) => {
               <div
                 key={i}
                 className={`p-3 rounded-lg border ${
-                  severityColor[finding.severity] || 'bg-slate-50 text-slate-700 border-slate-200'
+                  severityColor[finding.severity] || 'bg-slate-50 dark:bg-slate-800 text-slate-700 dark:text-slate-300 border-slate-200 dark:border-slate-700'
                 }`}
               >
                 <div className="flex items-start justify-between mb-1">
@@ -241,7 +241,7 @@ const InsightCards = ({ analysis }) => {
                 {finding.affected_groups && finding.affected_groups.length > 0 && (
                     <div className="mt-2 flex flex-wrap gap-1">
                       {finding.affected_groups.map((g) => (
-                        <span key={g} className="text-xs px-2 py-0.5 bg-white/50 rounded-full">
+                        <span key={g} className="text-xs px-2 py-0.5 bg-white/50 dark:bg-black/20 rounded-full">
                           {g}
                         </span>
                       ))}
@@ -258,13 +258,13 @@ const InsightCards = ({ analysis }) => {
         <CollapsibleSection
           title="Recommendations"
           icon={<span className="">💡</span>}
-          containerClass="bg-blue-50 border border-blue-200 rounded-xl"
-          headerClass="text-blue-800"
-          bodyClass="p-5 border-t border-blue-200"
+          containerClass="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-xl"
+          headerClass="text-blue-800 dark:text-blue-400"
+          bodyClass="p-5 border-t border-blue-200 dark:border-blue-800"
         >
           <ul className="space-y-1.5">
             {recommendations.map((rec, i) => (
-              <li key={i} className="text-sm text-blue-700 flex items-start">
+              <li key={i} className="text-sm text-blue-700 dark:text-blue-300 flex items-start">
                 <span className="mr-2 mt-0.5 font-bold">{i + 1}.</span>
                 {rec}
               </li>

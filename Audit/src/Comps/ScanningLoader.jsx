@@ -2,7 +2,7 @@ import React from 'react';
 
 const ScanningLoader = () => {
   return (
-    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-white/80 backdrop-blur-md">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-slate-50 dark:bg-slate-900">
       <div className="flex flex-col items-center space-y-6">
         {/* Animated scanner rings */}
         <div className="relative w-32 h-32">
@@ -36,17 +36,17 @@ const ScanningLoader = () => {
 
         {/* Text */}
         <div className="text-center space-y-2">
-          <h3 className="text-xl font-bold text-slate-800">
+          <h3 className="text-xl font-bold text-slate-800 dark:text-slate-100">
             Scanning for Bias…
           </h3>
-          <p className="text-sm text-slate-500 max-w-xs">
+          <p className="text-sm text-slate-500 dark:text-slate-400 max-w-xs">
             Our AI is analyzing your dataset for potential biases, proxy
             variables, and representation gaps.
           </p>
         </div>
 
         {/* Progress bar */}
-        <div className="w-64 h-1.5 bg-slate-200 rounded-full overflow-hidden">
+        <div className="w-64 h-1.5 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
           <div
             className="h-full bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 rounded-full animate-scanning-bar"
           ></div>
